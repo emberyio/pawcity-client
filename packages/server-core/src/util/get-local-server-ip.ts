@@ -8,7 +8,7 @@ interface ServerAddress {
 export default async (isChannelInstance?: boolean): Promise<ServerAddress> => {
   const ip = await internalIp.v4()
   return {
-    ipAddress: ip,
+    ipAddress: process.env.NODE_ENV === 'development' ? 'localhost' : ip,
     port: isChannelInstance ? '3032' : '3031'
   }
 }

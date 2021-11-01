@@ -7,6 +7,7 @@
   align-items: center;
   color: #000;
   z-index: 20;
+  border-radius: 10px !important;
 
   @media (max-width: 450px) {
     margin: 5px 10px 20px;
@@ -121,7 +122,7 @@
 
     }
 
-    
+
     :global(.MuiButton-root).iconContainerSend{
       display: flex;
       height: 37px;
@@ -186,13 +187,13 @@
 :global(.MuiPaper-root).message-wrapper{
     display: flex;
     flex-direction: column;
-    //height: 30vh;   
+    //height: 30vh;
     background-color: transparent;
     //margin-left: -55px;
     @media (max-width: 768px) {
       margin-left: 0;
     }
-    
+
   .message-container {
     display: flex;
     flex-direction: column;

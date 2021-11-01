@@ -52,7 +52,13 @@ function RouterComp(props) {
                 paddingTop: 'calc(50vh - 7px)'
               }}
             >
-              <CircularProgress />
+              <img
+                alt=""
+                src="https://catpunk.net/wp-content/uploads/2021/10/1-r-1536x1536.jpg"
+                height={64}
+                width={64}
+                style={{ borderRadius: '6px' }}
+              />
             </div>
           }
         >
