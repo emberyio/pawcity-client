@@ -83,7 +83,7 @@ const InstanceChat = (props: Props): any => {
     }
   }
 
-  const [chatWindowOpen, setChatWindowOpen] = React.useState(false)
+  const [chatWindowOpen, setChatWindowOpen] = React.useState(true)
   const [isMultiline, setIsMultiline] = React.useState(false)
   const [cursorPosition, setCursorPosition] = React.useState(0)
   const toggleChatWindow = () => {
@@ -215,7 +215,6 @@ const InstanceChat = (props: Props): any => {
                 id="newMessage"
                 label={newMessageLabel}
                 name="newMessage"
-                autoFocus
                 value={composingMessage}
                 inputProps={{
                   maxLength: 1000,
@@ -251,18 +250,18 @@ const InstanceChat = (props: Props): any => {
           </Card>
         </div>
       </div>
-      <div className={styles.iconCallChat}>
-        <Badge
-          color="primary"
-          variant="dot"
-          invisible={!unreadMessages}
-          anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
-        >
-          <Fab className={styles.chatBadge} color="primary" onClick={() => toggleChatWindow()}>
-            {!chatWindowOpen ? <MessageButton /> : <CloseButton onClick={() => toggleChatWindow()} />}
-          </Fab>
-        </Badge>
-      </div>
+      {/*<div className={styles.iconCallChat}>*/}
+      {/*  <Badge*/}
+      {/*    color="primary"*/}
+      {/*    variant="dot"*/}
+      {/*    invisible={!unreadMessages}*/}
+      {/*    anchorOrigin={{ vertical: 'top', horizontal: 'left' }}*/}
+      {/*  >*/}
+      {/*    <Fab className={styles.chatBadge} color="primary" onClick={() => toggleChatWindow()}>*/}
+      {/*      {!chatWindowOpen ? <MessageButton /> : <CloseButton onClick={() => toggleChatWindow()} />}*/}
+      {/*    </Fab>*/}
+      {/*  </Badge>*/}
+      {/*</div>*/}
     </>
   )
 }

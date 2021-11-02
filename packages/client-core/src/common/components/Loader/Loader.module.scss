@@ -9,17 +9,17 @@
   text-align:center;
 
   .imageOverlay{
-    filter: blur(15px);
+    //filter: blur(15px);
     position: absolute;
-    top: -10vh;
-    left: -10vw;
-    height: 120vh;
-    width: 120vw;
+    //top: -10vh;
+    //left: -10vw;
+    height: 100vh;
+    width: 100vw;
     position: absolute;
-    background: url('/static/bg.png') 0% 0% repeat;
+    background: url('/pawcity/loading-cover.png') 0% 0% repeat;
     background-position: center;
     background-size:cover;
-    animation: move-background 15s linear infinite;
+    //animation: move-background 15s linear infinite;
   }
 
   .linearProgressContainer{

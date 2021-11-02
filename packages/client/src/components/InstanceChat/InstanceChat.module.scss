@@ -65,7 +65,7 @@
   }
 
   .chat-view {
-    border-radius: 40px;
+    border-radius: 12px;
   }
 
   .chat-box {
@@ -93,6 +93,10 @@
     .messageFieldContainer{
       margin:0px;
       padding: 0 55px 0 20px;
+
+      fieldset {
+        border: 0;
+      }
 
       label {
         padding-left: 20px;
