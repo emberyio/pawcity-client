@@ -424,9 +424,7 @@ const PartyParticipantWindow = (props: Props): JSX.Element => {
           {(videoStream == null ||
             videoStreamPaused == true ||
             videoProducerPaused == true ||
-            videoProducerGlobalMute == true) && (
-            <img src={getAvatarURLForUser(isSelfUser ? selfUser?.id : user?.id)} draggable={false} />
-          )}
+            videoProducerGlobalMute == true) && <img src="/pawcity/CATPUNK-AVATAR.svg" draggable={false} />}
           <video key={peerId + '_cam'} ref={videoRef} draggable={false} />
         </div>
         <audio key={peerId + '_audio'} ref={audioRef} />

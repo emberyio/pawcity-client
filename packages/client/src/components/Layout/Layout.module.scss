@@ -46,7 +46,7 @@
     justify-content: center;
     align-items: center;
     color: black;
-    background: white;
+    background: transparent;
     width: 50px;
     height: 50px;
     cursor: pointer;
@@ -61,7 +61,7 @@
     &:hover { opacity: 1; }
     @media (max-width: 450px) {
         width: 40px;
-        height: 40px; 
+        height: 40px;
         left: 10px;
     }
 }
@@ -80,7 +80,7 @@
     min-width: 90px;
     scrollbar-width: none; /* IE */
     -ms-overflow-style: none; /* Firefox */
-    &::-webkit-scrollbar { 
+    &::-webkit-scrollbar {
         display: none;  /* Safari and Chrome */
     }
 
@@ -155,7 +155,7 @@
     justify-content: center;
     align-items: center;
     color: black;
-    background: white;
+    background: transparent;
     width: 50px;
     height: 50px;
     cursor: pointer;
@@ -172,10 +172,10 @@
     svg {
         color: black;
     }
-    @media (max-width: 450px) { 
+    @media (max-width: 450px) {
         width: 40px;
-        height: 40px; 
-        left: 10px; 
-        bottom: 70px; 
+        height: 40px;
+        left: 10px;
+        bottom: 70px;
     }
 }

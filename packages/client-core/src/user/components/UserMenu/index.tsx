@@ -38,10 +38,10 @@ const UserMenu = (props: UserMenuProps): any => {
   const dispatch = useDispatch()
 
   let menus = [
-    { id: Views.Profile, iconNode: PersonIcon },
-    { id: Views.Settings, iconNode: SettingsIcon },
-    { id: Views.Share, iconNode: LinkIcon },
-    { id: Views.Emote, imageNode: '/static/EmoteIcon.svg' }
+    { id: Views.Profile, imageNode: '/pawcity/profile.png', activeImage: '/pawcity/profile_click.png' },
+    { id: Views.Settings, imageNode: '/pawcity/setting.png', activeImage: '/pawcity/profile_click.png' },
+    { id: Views.Share, imageNode: '/pawcity/share.png', activeImage: '/pawcity/share_click.png' },
+    { id: Views.Emote, imageNode: '/pawcity/emoji.png', activeImage: '/pawcity/emoji_click.png' }
     //  { id: Views.Location, iconNode: FilterHdrIcon },
   ]
 
@@ -240,11 +240,15 @@ const UserMenu = (props: UserMenuProps): any => {
                     key={index}
                     id={menu.id + '_' + index}
                     onClick={setActiveMenu}
-                    className={`${styles.materialIconBlock} ${
-                      currentActiveMenu && currentActiveMenu.id === menu.id ? styles.activeMenu : null
-                    }`}
+                    className={`${styles.materialIconBlock}`}
                   >
-                    {menu.iconNode ? <menu.iconNode className={styles.icon} /> : <img src={menu.imageNode} />}
+                    {menu.iconNode ? (
+                      <menu.iconNode className={styles.icon} />
+                    ) : (
+                      <img
+                        src={currentActiveMenu && currentActiveMenu.id === menu.id ? menu.activeImage : menu.imageNode}
+                      />
+                    )}
                   </span>
                 )
               })}

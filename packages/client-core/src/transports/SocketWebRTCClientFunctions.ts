@@ -59,6 +59,8 @@ export async function createTransport(direction: string, channelType?: string, c
       channelId: channelId
     })
 
+    transportOptions.iceCandidates[0].ip = '127.0.0.1'
+
     if (direction === 'recv') transport = await networkTransport.mediasoupDevice.createRecvTransport(transportOptions)
     else if (direction === 'send')
       transport = await networkTransport.mediasoupDevice.createSendTransport(transportOptions)

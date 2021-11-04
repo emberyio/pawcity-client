@@ -159,18 +159,18 @@ const Layout = (props: Props): any => {
                 <>
                   {props.hideFullscreen ? null : fullScreenActive && props.harmonyOpen !== true ? (
                     <button type="button" className={styles.fullScreen} onClick={handle.exit}>
-                      <FullscreenExit />
+                      <img src="/pawcity/full-screen.png" style={{ borderRadius: '50%' }} />
                     </button>
                   ) : (
                     <button type="button" className={styles.fullScreen} onClick={handle.enter}>
-                      <ZoomOutMap />
+                      <img src="/pawcity/full-screen.png" style={{ borderRadius: '50%' }} />
                     </button>
                   )}
                 </>
               )}
 
               <button type="button" className={styles.respawn} id="respawn" onClick={respawnCallback}>
-                <Refresh />
+                <img src="/pawcity/reload.png" style={{ borderRadius: '50%' }} />
               </button>
 
               <Harmony

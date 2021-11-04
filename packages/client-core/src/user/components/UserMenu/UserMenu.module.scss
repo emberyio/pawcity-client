@@ -17,7 +17,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 4em;
+        width: 5em;
         border-radius: 10px !important;
 
         svg{
@@ -40,8 +40,6 @@
             padding: 1em;
             opacity: 0.8;
             margin-right: 5px;
-            border-radius: 50%;
-            background-color: #5F5FF1;
 
             @media (max-width: 500px) {
                 padding: 8px;

@@ -144,7 +144,7 @@
     &.video-paused,
     &.no-video {
         .video-wrapper{
-            background-color: #A8A8FF;
+            background-color: #ff00c9;
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
@@ -152,7 +152,7 @@
                 display: none;
             }
         }
-    }    
+    }
 
     .global-mute {
         display: none;
@@ -236,7 +236,7 @@
                 justify-content: center;
                 align-content: center;
                 width: 30px;
-            } 
+            }
         }
 
         .audio-slider {
@@ -326,10 +326,10 @@
 
         .video-wrapper { width: 100%; height: 100%; border-radius: 0; }
         .user-controls {
-            position: absolute; width: 100%; padding: 10px; bottom: 0; left: 0; margin: 0; 
+            position: absolute; width: 100%; padding: 10px; bottom: 0; left: 0; margin: 0;
             z-index: 12; border-radius: 0; display: none;
             .controls {
-                display: flex; flex-direction: row; justify-content: space-between; margin-left: 5px; 
+                display: flex; flex-direction: row; justify-content: space-between; margin-left: 5px;
                 .audio-slider { margin-top: 0; }
                 .pipBtn { transform: rotate(180deg); }
             }

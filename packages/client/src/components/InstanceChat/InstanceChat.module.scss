@@ -66,6 +66,7 @@
 
   .chat-view {
     border-radius: 12px;
+    border: 1px solid #ff00c9;
   }
 
   .chat-box {
@@ -93,9 +94,14 @@
     .messageFieldContainer{
       margin:0px;
       padding: 0 55px 0 20px;
+      background-color: rgba(255, 0, 201, 0.2);
 
       fieldset {
         border: 0;
+      }
+
+      input {
+        padding: 10px 14px;
       }
 
       label {
@@ -106,7 +112,8 @@
       }
 
       :global(.MuiInputLabel-formControl) {
-        transform: translate(0, 16px) scale(1);
+        transform: translate(0, 10px) scale(1);
+        color: black;
       }
 
       :global(.MuiInput-root) {
