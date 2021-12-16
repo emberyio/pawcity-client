@@ -17,8 +17,8 @@ export class S3Provider implements StorageProviderInterface {
   provider: AWS.S3 = new AWS.S3({
     accessKeyId: config.aws.keys.accessKeyId,
     secretAccessKey: config.aws.keys.secretAccessKey,
-    region: config.aws.s3.region,
-    s3ForcePathStyle: true
+    s3ForcePathStyle: true,
+    endpoint: new AWS.Endpoint('s3.sgp.cloud.ovh.net')
   })
 
   blob: typeof S3BlobStore = new S3BlobStore({
