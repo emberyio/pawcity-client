@@ -20,6 +20,7 @@ import { EventEmitter } from 'events'
 import services from '@xrengine/server-core/src/services'
 import sequelize from '@xrengine/server-core/src/sequelize'
 import { Application } from '@xrengine/server-core/declarations'
+import { isDev } from '@xrengine/common/src/utils/isDev'
 
 const emitter = new EventEmitter()
 
@@ -131,7 +132,7 @@ if (config.server.enabled) {
     // Set up event channels (see channels.js)
     app.configure(channels)
 
-    if (config.server.mode === 'api' || config.server.mode === 'realtime') {
+    if (config.server.mode !== 'local') {
       app.k8AgonesClient = api({
         endpoint: `https://${config.kubernetes.serviceHost}:${config.kubernetes.tcpPort}`,
         version: '/apis/agones.dev/v1',
@@ -161,6 +162,10 @@ if (config.server.enabled) {
     app.use('/healthcheck', (req, res) => {
       res.sendStatus(200)
     })
+
+    if (isDev && !config.db.forceRefresh) {
+      app.service('project')._fetchDevLocalProjects()
+    }
   } catch (err) {
     console.log('Server init failure')
     console.log(err)

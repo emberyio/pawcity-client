@@ -58,7 +58,9 @@ import { useWorld } from '../../ecs/functions/SystemHooks'
 import { matchActionOnce } from '../../networking/functions/matchActionOnce'
 import { configureEffectComposer } from '../../renderer/functions/configureEffectComposer'
 import { EngineRenderer } from '../../renderer/WebGLRendererSystem'
-import { dispatchFrom } from '../../networking/functions/dispatchFrom'
+import { dispatchLocal } from '../../networking/functions/dispatchFrom'
+import { EngineActions } from '../../ecs/classes/EngineService'
+import { CollisionGroups, DefaultCollisionMask } from '../../physics/enums/CollisionGroups'
 
 export interface SceneDataComponent extends ComponentJson {
   data: any
@@ -90,7 +92,7 @@ export const loadSceneFromJSON = async (sceneData: SceneJson) => {
 
   Engine.sceneLoaded = true
   createCSM()
-  EngineEvents.instance.dispatchEvent({ type: EngineEvents.EVENTS.SCENE_LOADED })
+  dispatchLocal(EngineActions.sceneLoaded(true) as any)
 }
 
 /**
@@ -109,7 +111,7 @@ export const loadComponents = (entity: Entity, sceneEntityId: string, sceneEntit
 
 export const loadComponent = (entity: Entity, component: SceneDataComponent): void => {
   // remove '-1', '-2' etc suffixes
-  // console.log(component)
+  // console.log('===loadComponent', component)
   const name = component.name.replace(/(-\d+)|(\s)/g, '')
   const world = useWorld()
   switch (name) {
@@ -185,7 +187,6 @@ export const loadComponent = (entity: Entity, component: SceneDataComponent): vo
           Object.keys(component.data.extend).forEach((key) => {
             component.data[key] = component.data.extend[key]
           })
-          console.log(component.data)
           registerSceneLoadPromise(loadGLTFModel(entity, component))
         }
       }
@@ -196,7 +197,6 @@ export const loadComponent = (entity: Entity, component: SceneDataComponent): vo
       break
 
     case 'interact':
-      console.log(component.data)
       if (component.data.interactable) addComponent(entity, InteractableComponent, { data: component.data })
       break
 
@@ -301,7 +301,11 @@ export const loadComponent = (entity: Entity, component: SceneDataComponent): vo
       const shape = world.physics.createShape(
         new PhysX.PxBoxGeometry(transform.scale.x, transform.scale.y, transform.scale.z),
         undefined,
-        boxColliderProps as any
+        {
+          ...(boxColliderProps as any),
+          collisionLayer: DefaultCollisionMask,
+          collisionMask: CollisionGroups.Default
+        }
       )
 
       const body = createBody(entity, { bodyType: 0 }, [shape])
@@ -360,7 +364,7 @@ export const loadComponent = (entity: Entity, component: SceneDataComponent): vo
     case 'cameraproperties':
       if (isClient) {
         matchActionOnce(NetworkWorldAction.spawnAvatar.matches, (spawnAction) => {
-          if (spawnAction.userId === Engine.userId) {
+          if (spawnAction.$from === Engine.userId) {
             setCameraProperties(useWorld().localClientEntity, component.data)
             return true
           }
@@ -393,16 +397,6 @@ export const loadComponent = (entity: Entity, component: SceneDataComponent): vo
         addComponent(entity, VisibleComponent, { value: component.data.visible })
       }
       break
-
-    /* deprecated */
-    case 'mesh-collider':
-    case 'collidable':
-    case 'floor-plan':
-      console.log("[Scene Loader] WARNING: '", name, ' is deprecated')
-      break
-
-    default:
-      console.log("[Scene Loader] WARNING: Couldn't load component'", name, "'")
   }
 }
 
@@ -410,9 +404,6 @@ export const registerSceneLoadPromise = (promise: Promise<any>) => {
   Engine.sceneLoadPromises.push(promise)
   promise.then(() => {
     Engine.sceneLoadPromises.splice(Engine.sceneLoadPromises.indexOf(promise), 1)
-    EngineEvents.instance.dispatchEvent({
-      type: EngineEvents.EVENTS.SCENE_ENTITY_LOADED,
-      entitiesLeft: Engine.sceneLoadPromises.length
-    })
+    dispatchLocal(EngineActions.sceneEntityLoaded(Engine.sceneLoadPromises.length) as any)
   })
 }
