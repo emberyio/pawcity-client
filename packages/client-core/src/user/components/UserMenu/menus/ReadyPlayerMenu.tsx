@@ -1,12 +1,11 @@
 import CircularProgress from '@mui/material/CircularProgress'
 import { ArrowBack } from '@mui/icons-material'
-import { Config } from '@xrengine/common/src/config'
 import {
   MAX_ALLOWED_TRIANGLES,
   THUMBNAIL_HEIGHT,
   THUMBNAIL_WIDTH
 } from '@xrengine/common/src/constants/AvatarConstants'
-import { getLoader, loadExtentions } from '@xrengine/engine/src/assets/functions/LoadGLTF'
+import { getLoader, loadExtensions } from '@xrengine/engine/src/assets/functions/LoadGLTF'
 import { getOrbitControls } from '@xrengine/engine/src/input/functions/loadOrbitControl'
 import React from 'react'
 import { withTranslation } from 'react-i18next'
@@ -145,7 +144,7 @@ export class ReadyPlayerMenu extends React.Component<Props, State> {
             this.state.avatarUrl.length
           )
           gltf.scene.name = 'avatar'
-          loadExtentions(gltf)
+          loadExtensions(gltf)
           this.scene.add(gltf.scene)
           this.renderScene()
           const error = this.validate(gltf.scene)
@@ -232,7 +231,7 @@ export class ReadyPlayerMenu extends React.Component<Props, State> {
           }}
         ></div>
         {this.state.avatarUrl === '' ? (
-          <iframe src={Config.publicRuntimeConfig.readyPlayerMeUrl} />
+          <iframe src={`https://${globalThis.process.env['VITE_READY_PLAYER_ME_URL']}`} />
         ) : (
           <div className={styles.centerProgress}>
             <CircularProgress />
