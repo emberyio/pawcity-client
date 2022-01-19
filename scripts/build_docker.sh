@@ -10,12 +10,12 @@ REGION=$4
 docker container prune --force
 docker image prune --force
 
-if [ $PRIVATE_ECR == "true" ]
-then
-  aws ecr get-login-password --region $REGION | docker login -u AWS --password-stdin $ECR_URL
-else
-  aws ecr-public get-login-password --region us-east-1 | docker login -u AWS --password-stdin $ECR_URL
-fi
+#if [ $PRIVATE_ECR == "true" ]
+#then
+#  aws ecr get-login-password --region $REGION | docker login -u AWS --password-stdin $ECR_URL
+#else
+#  aws ecr-public get-login-password --region us-east-1 | docker login -u AWS --password-stdin $ECR_URL
+#fi
 
 mkdir -p ./project-package-jsons/projects/default-project
 cp packages/projects/default-project/package.json ./project-package-jsons/projects/default-project

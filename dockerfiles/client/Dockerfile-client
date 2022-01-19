@@ -18,6 +18,7 @@ COPY packages/projects/package.json ./packages/projects/
 COPY packages/server-core/package.json ./packages/server-core/
 COPY project-package-jsons ./
 
+RUN npm config set strict-ssl false
 RUN npm install --production=false --loglevel notice --legacy-peer-deps
 
 # copy then compile the code

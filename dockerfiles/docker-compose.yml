@@ -1,15 +1,15 @@
 version: '3.8'
 services:
-  analytics:
-    image: ${LABEL}-analytics
-    build:
-      context: ../
-      dockerfile: ./dockerfiles/analytics/Dockerfile-analytics
-  api:
-    image: ${LABEL}-api
-    build:
-      context: ../
-      dockerfile: ./dockerfiles/api/Dockerfile-api
+  # analytics:
+  #   image: ${LABEL}-analytics
+  #   build:
+  #     context: ../
+  #     dockerfile: ./dockerfiles/analytics/Dockerfile-analytics
+  # api:
+  #   image: ${LABEL}-api
+  #   build:
+  #     context: ../
+  #     dockerfile: ./dockerfiles/api/Dockerfile-api
   client:
     image: ${LABEL}-client
     build:
@@ -21,13 +21,13 @@ services:
         MYSQL_PASSWORD: $MYSQL_PASSWORD
         MYSQL_DATABASE: $MYSQL_DATABASE
         MYSQL_USER: $MYSQL_USER
-  gameserver:
-    image: ${LABEL}-gameserver
-    build:
-      context: ..
-      dockerfile: ./dockerfiles/gameserver/Dockerfile-gameserver
-  testbot:
-    image: ${LABEL}-testbot
-    build:
-      context: ../
-      dockerfile: ./dockerfiles/testbot/Dockerfile-testbot
+  # gameserver:
+  #   image: ${LABEL}-gameserver
+  #   build:
+  #     context: ..
+  #     dockerfile: ./dockerfiles/gameserver/Dockerfile-gameserver
+  # testbot:
+  #   image: ${LABEL}-testbot
+  #   build:
+  #     context: ../
+  #     dockerfile: ./dockerfiles/testbot/Dockerfile-testbot

@@ -17,6 +17,7 @@ COPY packages/matchmaking/package.json ./packages/matchmaking/
 COPY packages/server/package.json ./packages/server/
 COPY packages/server-core/package.json ./packages/server-core/
 
+RUN npm config set strict-ssl false
 RUN npm install --production=false --loglevel notice --legacy-peer-deps
 
 COPY . .
