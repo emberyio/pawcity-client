@@ -22,5 +22,4 @@ kubernetes/**
 config/prod.json
 
 .env
-.env.local
 .idea/
