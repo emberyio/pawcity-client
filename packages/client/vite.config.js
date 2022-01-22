@@ -54,6 +54,7 @@ const getDependenciesToOptimize = () => {
 
 export default defineConfig(async (command) => {
   const env = loadEnv('', process.cwd() + '../../');
+  console.log(JSON.stringify(env))
   dotenv.config()
   const clientSetting = await getClientSetting()
   process.env = {
