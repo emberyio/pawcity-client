@@ -14,7 +14,6 @@ import Paper from '@mui/material/Paper'
 import { useAuthState } from '../../../user/services/AuthService'
 import { PROJECT_PAGE_LIMIT, useProjectState } from '../../../common/services/ProjectService'
 import { ProjectService } from '../../../common/services/ProjectService'
-import { TestBotService } from '../../services/TestBotService'
 import { GithubAppService, useGithubAppState } from '../../services/GithubAppService'
 import styles from './Projects.module.scss'
 import UploadProjectModal from './UploadProjectModal'
@@ -158,9 +157,11 @@ const Projects = () => {
 
   const tryReuploadProjects = async (row: ProjectInterface) => {
     try {
-      if (!row.repositoryPath) return
+      if (!row.repositoryPath && row.name !== 'default-project') return
       const existingProjects = adminProjects.value.find((projects) => projects.name === row.name)!
-      await ProjectService.uploadProject(existingProjects.repositoryPath)
+      await ProjectService.uploadProject(
+        row.name === 'default-project' ? 'default-project' : existingProjects.repositoryPath
+      )
     } catch (err) {
       console.log(err)
     }
@@ -222,17 +223,6 @@ const Projects = () => {
               {'Rebuild'}
             </Button>
           </Grid>
-          {/* <Grid item xs={4}>
-            <Button
-              className={styles['open-modal']}
-              type="button"
-              variant="contained"
-              color="primary"
-              onClick={TestBotService.createTestBot}
-            >
-              {'Spawn Bots'}
-            </Button>
-          </Grid> */}
         </Grid>
         <TableContainer className={styles.tableContainer}>
           <Table stickyHeader aria-labelledby="tableTitle" size={'medium'} aria-label="enhanced table">
@@ -263,7 +253,7 @@ const Projects = () => {
                       {user.userRole.value === 'admin' && (
                         <Button
                           className={styles.checkbox}
-                          disabled={row.repositoryPath === null}
+                          disabled={row.repositoryPath === null && row.name !== 'default-project'}
                           onClick={(e) => tryReuploadProjects(row)}
                           name="stereoscopic"
                           color="primary"
