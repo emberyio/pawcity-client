@@ -13,5 +13,4 @@ export const getClientSetting = async () => {
     icon192px: '/android-chrome-192x192.png',
     icon512px: '/android-chrome-512x512.png'
   }
-  }
 }
